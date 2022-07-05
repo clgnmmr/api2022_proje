@@ -46,10 +46,28 @@ public class Get01 {
        //response.prettyPrint();
        response.then().assertThat().statusCode(200).contentType("application/json").statusLine("HTTP/1.1 200 OK");
 
-        System.out.println("statusCode :"+response.statusCode());
 
+        //'Status Code' nasıl yazdırılır:
+        System.out.println("Status Code: "+response.statusCode());
+
+        //'Content Type' nasıl yazdırılır:
+        System.out.println("Content Type: "+response.contentType());
+
+        //'Status Line' nasıl yazdırılır:
+
+        System.out.println("Status Line: "+response.statusLine());
+        //'Header' nasıl yazdırılır:
+
+        System.out.println(response.header("User-Agent"));
+
+        //'Headers' nasıl yazdırılır:
+        System.out.println("Headers:\n"+response.headers());
+
+        //'Time' nasıl yazdırılır:
+        System.out.println("Time: "+response.getTime());
+
+        // size nasıl yazdırulır
+        System.out.println(""+response.headers().size());
 
     }
-
-
 }
