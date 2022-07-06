@@ -40,11 +40,11 @@ public class Get03 extends BaseUrls{
         //4. Step: Do Assertion
 
         //1. Yol
-      /*  response.then().assertThat().statusCode(200).
+       response.then().assertThat().statusCode(200).
                 contentType("application/json").
-                body("title",equalTo("et itaque necessitatibus maxime molestiae qui quas velitX")).
+                body("title",equalTo("et itaque necessitatibus maxime molestiae qui quas velit")).
                 body("completed", equalTo(false)).
-                body("userId", equalTo(2));*/
+                body("userId", equalTo(2));
 
         //2. Yol:
         response.then().assertThat().statusCode(200).
