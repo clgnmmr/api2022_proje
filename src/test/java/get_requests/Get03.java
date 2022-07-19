@@ -57,5 +57,16 @@ public class Get03 extends JsonPlaceHolderBaseUrl {
                         "userId", equalTo(2));
 
     }
+    /*
+
+    assertion yaparken java calışmayı durduğunda hata sonrası kodlar calışmaz boylece hata sonrası asseertion lar hakkında bilgi sahibi olamayız
+    fakat hata oncesi assertrion lar geçmiştir
+
+     eğer kodumuzu hata noktasında duracak sekilde yazarsak hard assertion yapmış oluyoruz
+
+     eger kodumuz hata sonrasında durmayacak şekilde yazarsak soft assertion yapmış oluyoruz
+      eğer coklu body method içinde yaparsak hard assertion yapmış oluyoruz
+      ama tek body method içinde yaparsakta soft assertion yapmış oluruz.
+     */
 
 }
