@@ -3,6 +3,7 @@ package get_requests;
 import base_urls.JsonPlaceHolderBaseUrl;
 import io.restassured.response.Response;
 import org.junit.Test;
+import test_data.JsonPlaceHolderTestData;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,6 +60,7 @@ public class Get08 extends JsonPlaceHolderBaseUrl {
 
 
         Map<String,Object> actualData=response.as(HashMap.class);
+        System.out.println(actualData);
 
         //4.Step : Do Assertion
 
@@ -73,6 +75,35 @@ public class Get08 extends JsonPlaceHolderBaseUrl {
 
 
     }
+    @Test
+    public void get02() {
+        // 1.step : set the Url
+        spec.pathParams("first", "todos", "second", 2);
 
+        // 2.step: set the b expected data
+
+        JsonPlaceHolderTestData expectedDate=new JsonPlaceHolderTestData();
+
+        Map<String,Object> expectedDateMap=expectedDate.expectedDataWithAllKeys(1,"quis ut nam facilis et officia qui",false);
+        expectedDateMap.put("StatusCode",200);
+        expectedDateMap.put("Via","1.1 vegur");
+        expectedDateMap.put("Server","cloudflare");
+        //3.Step: Send the request amd get the response
+
+        Response response=given().spec(spec).when().get("/{first}/{second}");
+
+
+        Map<String,Object> actualData=response.as(HashMap.class);
+        System.out.println(actualData);
+        //4.Step : Do Assertion
+        assertEquals(expectedDateMap.get("userId"),actualData.get("userId"));
+        assertEquals(expectedDateMap.get("title"),actualData.get("title"));
+        assertEquals(expectedDateMap.get("completed"),actualData.get("completed"));
+        assertEquals(expectedDateMap.get("StatusCode"),response.getStatusCode());
+        assertEquals(expectedDateMap.get("Via"),response.header("Via"));
+        assertEquals(expectedDateMap.get("Server"),response.header("Server"));
+
+
+    }
 
 }

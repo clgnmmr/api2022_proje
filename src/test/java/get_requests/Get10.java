@@ -1,6 +1,17 @@
 package get_requests;
 
-public class Get10 {
+import base_urls.GoRestBaseUrl;
+import io.restassured.response.Response;
+import org.junit.Test;
+import test_data.GoRestTestData;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static io.restassured.RestAssured.*;
+import static org.junit.Assert.assertEquals;
+
+public class Get10 extends GoRestBaseUrl {
 
       /*
         Given
@@ -11,16 +22,94 @@ public class Get10 {
             Status Code should be 200
         And
             Response body should be like
-                {
-                 https://gorest.co.in/public/v1/users/2965
-        "meta": null,
-        "data": {
-                "id": 2965,
-                "name": "Mr. Gita Menon",
-                "email": "gita_menon_mr@bayer.com",
-                "gender": "female",
-                "status": "inactive"
-                            }
-                }
+        {
+         "meta": null,
+         "data": {
+             "id": 2986,
+             "name": "Anunay Deshpande",
+             "email": "anunay_deshpande@bogisich-mccullough.net",
+             "gender": "male",
+             "status": "active"
+              }
+        }
      */
+
+    @Test
+    public  void gety01(){
+        // 1.Step : set the url
+
+        spec.pathParams("first","users","second",2986);
+
+        // 2. Step : Set the vexpected data
+          // innermap
+
+
+
+
+
+
+        Map<String,String>  dataKeyMap=new HashMap<>();
+
+        dataKeyMap.put("name","Anunay Deshpande");
+        dataKeyMap.put("email","anunay_deshpande@bogisich-mccullough.net");
+        dataKeyMap.put("gender","male");
+        dataKeyMap.put("status","active");
+
+
+        Map<String,Object> expectedData=new HashMap<>();
+
+        expectedData.put("meta",null);
+        expectedData.put("data",dataKeyMap);
+
+
+
+        // 3. Step : Send the request and get the response
+
+        Response response=given().spec(spec).when().get("/{first}/{second}");
+        // de selerizisions
+
+        Map<String,Object> actualData=response.as(HashMap.class);
+        // 4.Step : Do Assertion
+
+        response.then().assertThat().statusCode(200);
+
+        assertEquals(expectedData.get("meta"),actualData.get("meta"));
+        assertEquals(dataKeyMap.get("name"),((Map)actualData.get("data")).get("name"));
+        assertEquals(dataKeyMap.get("email"),((Map)actualData.get("data")).get("email"));
+        assertEquals(dataKeyMap.get("gender"),((Map)actualData.get("data")).get("gender"));
+        assertEquals(dataKeyMap.get("status"),((Map)actualData.get("data")).get("status"));
+
+
+    }
+
+    @Test
+    public  void gety02() {
+        // 1.Step : set the url
+
+        spec.pathParams("first", "users", "second", 2986);
+
+        // 2. Step : Set the vexpected data
+        // innermap
+        GoRestTestData dataKey = new GoRestTestData();
+        Map<String, String> dataKeyMap1 = dataKey.dataKeyMap("Anunay Deshpande", "anunay_deshpande@bogisich-mccullough.net", "male", "active");
+        Map<String, Object> expectedData1 = dataKey.expectedDataMap(null, dataKeyMap1);
+
+        // 3. Step : Send the request and get the response
+
+        Response response = given().spec(spec).when().get("/{first}/{second}");
+        // de selerizisions
+
+        Map<String, Object> actualData = response.as(HashMap.class);
+        // 4.Step : Do Assertion
+
+        response.then().assertThat().statusCode(200);
+
+        assertEquals(expectedData1.get("meta"),actualData.get("meta"));
+        assertEquals(dataKeyMap1.get("name"),((Map)actualData.get("data")).get("name"));
+        assertEquals(dataKeyMap1.get("email"),((Map)actualData.get("data")).get("email"));
+        assertEquals(dataKeyMap1.get("gender"),((Map)actualData.get("data")).get("gender"));
+        assertEquals(dataKeyMap1.get("status"),((Map)actualData.get("data")).get("status"));
+
+
+    }
 }
