@@ -16,7 +16,7 @@ public class Get06 extends HerOkuAppBaseUrl {
 
     /*
         Given
-            https://restful-booker.herokuapp.com/booking/101
+            https://restful-booker.herokuapp.com/booking/1002
         When
             User send a GET request to the URL
         Then
@@ -26,8 +26,8 @@ public class Get06 extends HerOkuAppBaseUrl {
         And
             Response body should be like;
           {
-            "firstname": "GGS",
-            "lastname": "FINCH",
+            "firstname": "Jim",
+            "lastname": "Brown",
             "totalprice": 111,
             "depositpaid": true,
             "bookingdates": {
@@ -41,7 +41,7 @@ public class Get06 extends HerOkuAppBaseUrl {
 
         //1. Step: Set the Url
 
-        spec.pathParams("first","booking", "second", 101);
+        spec.pathParams("first","booking", "second", 1002);
         //2. Set the expected data
 
         //3. Step: Send the request and get the response
@@ -55,8 +55,8 @@ public class Get06 extends HerOkuAppBaseUrl {
                 assertThat().
                 statusCode(200).
                 contentType(ContentType.JSON).
-                body("firstname",equalTo("GGS"),
-                        "lastname",equalTo("FINCH"),
+                body("firstname",equalTo("Jim"),
+                        "lastname",equalTo("Brown"),
                         "totalprice", equalTo(111),
                         "depositpaid", equalTo(true),
                         "bookingdates.checkin",equalTo("2018-01-01"),
@@ -65,8 +65,8 @@ public class Get06 extends HerOkuAppBaseUrl {
         //2. Yol: JsonPath Class kullanılır
 
         JsonPath json = response.jsonPath();
-        assertEquals("GGS", json.getString("firstname"));
-        assertEquals("FINCH", json.getString("lastname"));
+        assertEquals("Jim", json.getString("firstname"));
+        assertEquals("Brown", json.getString("lastname"));
         assertEquals(111, json.getInt("totalprice"));
         assertEquals(true, json.getBoolean("depositpaid"));
         assertEquals("2018-01-01", json.getString("bookingdates.checkin"));
@@ -80,8 +80,8 @@ public class Get06 extends HerOkuAppBaseUrl {
 
         //2) Obje aracılığı ile assert yapılır.
 
-        softAssert.assertEquals(json.getString("firstname"), "GGS","firstname uyuşmadı");
-        softAssert.assertEquals(json.getString("lastname"),"FINCH","lastname uyuşmadı");
+        softAssert.assertEquals(json.getString("firstname"), "Jim","firstname uyuşmadı");
+        softAssert.assertEquals(json.getString("lastname"),"Brown","lastname uyuşmadı");
         softAssert.assertEquals(json.getInt("totalprice"),111,"totalprice uyuşmadı");
         softAssert.assertEquals(json.getBoolean("depositpaid"),true,"depositpaid uyuşmadı");
         softAssert.assertEquals(json.getString("bookingdates.checkin"),"2018-01-01","checkin uyuşmadı");
