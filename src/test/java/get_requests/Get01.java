@@ -41,7 +41,7 @@ public class Get01 {
      */
     @Test
     public  void get01(){
-        String url=" https://restful-booker.herokuapp.com/booking/555";
+        String url=" https://restful-booker.herokuapp.com/booking/55";
 
 
         Response response=given().when().get(url);

@@ -50,6 +50,7 @@ public class Get02 {
             assertFalse(response.asString().contains("TechProEd"));
 
             //assertEquals() methodu parantez içindeki iki değer eşit ise testi geçirir.assertEquals("Cowboy",response.header("Server"));
+            assertEquals("Cowboy",response.header("Server"));
 
 
         }
