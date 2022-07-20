@@ -105,7 +105,7 @@ public class Get10 extends GoRestBaseUrl {
         response.then().assertThat().statusCode(200);
 
         assertEquals(expectedData1.get("meta"),actualData.get("meta"));
-        assertEquals(dataKeyMap1.get("name"),((Map)actualData.get("data")).get("name"));
+        assertEquals(dataKeyMap1.get("name"),((Map)actualData.get("data")).get("name"));// once data elementine ulaşıp buradab aldığım objeyi map formatına cast yapılır ve çağrılır
         assertEquals(dataKeyMap1.get("email"),((Map)actualData.get("data")).get("email"));
         assertEquals(dataKeyMap1.get("gender"),((Map)actualData.get("data")).get("gender"));
         assertEquals(dataKeyMap1.get("status"),((Map)actualData.get("data")).get("status"));
