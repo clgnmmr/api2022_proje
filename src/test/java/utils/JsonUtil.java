@@ -22,7 +22,7 @@ public class JsonUtil {
         try {
           javaResult=  mapper.readValue(json,cls);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         return javaResult;
