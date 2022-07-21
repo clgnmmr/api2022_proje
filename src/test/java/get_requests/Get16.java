@@ -21,6 +21,26 @@ public class Get16 extends DummyRestApiUrl {
            URL: https://dummy.restapiexample.com/api/v1/employees
            HTTP Request Method: GET Request
            Test Case: Type by using Gherkin Language
+
+           Given
+              https://dummy.restapiexample.com/api/v1/employees
+           When
+		 		I send GET Request to the URL
+		   Then
+		 		Status code is 200
+		 	And
+                There are 24 employees
+            And
+              "Tiger Nixon" and "Garrett Winters" are among the employees
+           And
+              The greatest age is 66
+           And
+             The name of the lowest age is "Tatyana Fitzpatrick"
+            And
+              Total salary of all employees is 6,644,770
+
+
+
            Assert:  i) Status code is 200
                    ii) There are 24 employees
                   iii) "Tiger Nixon" and "Garrett Winters" are among the employees
@@ -47,7 +67,7 @@ public class Get16 extends DummyRestApiUrl {
 
 
 
-
+// iv) The greatest age is 66
         JsonPath json = response.jsonPath();
 
         List<Integer> ageList=json.getList("data.findAll{it.employee_age>0}.employee_age");//Groovy Language = Java temelli bir proglamlama dili
@@ -57,13 +77,15 @@ public class Get16 extends DummyRestApiUrl {
 
 
 
-        List<String> nameList=json.getList("data.findAll{it.employee_age==19}.employee_name");
+        //  v) The name of the lowest age is "Tatyana Fitzpatrick"
+        List<String> nameList=json.getList("data.findAll{it.employee_age=="+ageList.get(0)+"}.employee_name");
         System.out.println(nameList);
         assertEquals("Tatyana Fitzpatrick",nameList.get(0));
 
 
 
-        List<Integer> salaryList=json.getList("data.findAll{it.employee_age>0}.employee_salary");//Groovy Language = Java temelli bir proglamlama dili
+        //vi) Total salary of all employees is 6,644,770
+        List<Integer> salaryList=json.getList("data.findAll{it.employee_age>0}.employee_salary");
        int toplam=0;
         for (Integer w:salaryList) {
             toplam+=w;
